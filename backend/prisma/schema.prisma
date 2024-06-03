@@ -18,6 +18,21 @@ model User {
 }
 
 model Group {
-  groupId   String @id @default(auto()) @map("_id") @db.ObjectId
+  groupId   String   @id @default(auto()) @map("_id") @db.ObjectId
   groupName String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("groups")
+}
+
+model Message {
+  messageId      String   @id @default(auto()) @map("_id") @db.ObjectId
+  content        String
+  receiverId     String
+  senderId       String
+  groupMessageId String   @db.ObjectId
+  sendAt         DateTime @default(now())
+
+  @@map("messages")
 }
